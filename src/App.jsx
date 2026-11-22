@@ -15,6 +15,7 @@ import Eventos from "./componentes/eventos/Eventos.jsx";
 import LoginEmpresa from "./componentes/usuarios/LoginEmpresa.jsx";
 import PerfilUsuario from "./componentes/usuarios/PerfilUsuario.tsx";
 import Canais from "./componentes/canais/Canais.jsx";
+import VideosRecentes from "./componentes/canais/VideosRecentes.jsx";
 import Parceiros from "./componentes/Parceiros.tsx";
 import Quiz from "./componentes/minimentes/Quiz.jsx";
 import TermosDeUso from "./componentes/TermosDeUso.jsx";
@@ -88,6 +89,7 @@ function AppContent() {
 
         <Route path="/minimentes" element={<MiniMentes />} />
         <Route path="/canais" element={<Canais />} />
+        <Route path="/videos-recentes" element={<VideosRecentes />} />
         <Route path="/parceiros" element={<Parceiros />} />
 
         <Route path="/quiz" element={<Quiz />} />

@@ -118,7 +118,7 @@ useEffect(() => {
       try {
         const bstr = atob(arr[1]);
         const u8arr = new Uint8Array(bstr.length);
-        
+        v 
         for (let i = 0; i < bstr.length; i++) 
           u8arr[i] = bstr.charCodeAt(i);
         
@@ -264,6 +264,35 @@ useEffect(() => {
   setVideoAberto(v);
   setConfirmarRedirecionamento(true);
 };
+
+
+
+
+const registrarVideoRecente = (video) => {
+  try {
+    const historicoAtual = JSON.parse(
+      localStorage.getItem("videos_recentes") || "[]"
+    );
+
+    const novoHistorico = [
+      video,
+      ...historicoAtual.filter(
+        (item) => String(item.id) !== String(video.id)
+      ),
+    ].slice(0, 5);
+
+    localStorage.setItem(
+      "videos_recentes",
+      JSON.stringify(novoHistorico)
+    );
+  } catch (error) {
+    console.error("Erro ao salvar histórico:", error);
+  }
+};
+
+
+
+
 
   const Heart = ({ filled, size = 16, className = "" }) => {
     const [usuarioLogado, setUsuarioLogado] = useState({});
@@ -674,6 +703,11 @@ useEffect(() => {
         ) : (
           <section className="animate-fadeIn">
             <h2 className="text-2xl font-bold text-pink-600 mb-6">Feed de Vídeos</h2>
+            <button
+            onClick={() => window.location.href = "/videos-recentes"}
+            className="bg-purple-600 text-white px-5 py-2.5 rounded-xl font-semibold shadow hover:bg-purple-700 transition-all mb-6" > 
+            Vídeos recentes
+            </button>
 
             {feedVideos.length ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -810,6 +844,9 @@ useEffect(() => {
       <div className="flex gap-3">
         <button
           onClick={() => {
+          registrarVideoRecente(videoAberto); 
+
+
             window.open(
               videoAberto.url,
               "_blank",
